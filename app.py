@@ -7,8 +7,8 @@ import time
   # --- UI Configuration ---
 st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
 
-  st.title("🎥 AI Video Deep Analyzer & Prompt Generator")
-  st.markdown("""
+st.title("🎥 AI Video Deep Analyzer & Prompt Generator")
+st.markdown("""
   Is app mein aap koi bhi video upload karein, AI use deeply analyze karega aur aapko:
   1. **Detailed Description** dega.
   2. **AI Video/Image Prompts** generate karke dega taaki aap waisa hi content create kar sakein.
@@ -79,11 +79,11 @@ def analyze_video(video_path, user_api_key, model_name):
           return f"Error: {str(e)}"
 
   # --- Main Interface ---
-  uploaded_file = st.file_uploader("Choose a video file...", type=["mp4", "mov", "avi", "mkv"])
+uploaded_file = st.file_uploader("Choose a video file...", type=["mp4", "mov", "avi", "mkv"])
 
-  if uploaded_file is not None:
+if uploaded_file is not None:
       # Save uploaded file to a temporary location
-      with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(uploaded_file.name)[1])
+    with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(uploaded_file.name)[1])
   as tmp_file:
           tmp_file.write(uploaded_file.read())
           tmp_path = tmp_file.name
@@ -102,4 +102,6 @@ def analyze_video(video_path, user_api_key, model_name):
                   st.markdown(result)
 
       # Clean up temp file
-      os.remove(tmp_path)
+      os.remove(tmp_path)# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+print("Start small. Ship something.")
