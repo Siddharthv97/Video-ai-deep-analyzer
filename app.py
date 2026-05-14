@@ -1,8 +1,8 @@
 import streamlit as st
-  import google.generativeai as genai
-  import tempfile
-  import os
-  import time
+import google.generativeai as genai
+import tempfile
+import os
+import time
 
   # --- UI Configuration ---
   st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
@@ -15,7 +15,7 @@ import streamlit as st
   """)
 
   # --- Sidebar for API Key & Model Selection ---
-  with st.sidebar:
+with st.sidebar:
       st.header("Settings")
       api_key = st.text_input("Enter Google Gemini API Key:", type="password")
       st.info("Get your free key from [Google AI Studio](https://aistudio.google.com/)")
@@ -30,7 +30,7 @@ import streamlit as st
       )
 
   # --- AI Logic ---
-  def analyze_video(video_path, user_api_key, model_name):
+def analyze_video(video_path, user_api_key, model_name):
       try:
           # Configure AI
           genai.configure(api_key=user_api_key)
