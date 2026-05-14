@@ -22,18 +22,43 @@ with st.sidebar:
 
       st.markdown("---")
       st.subheader("Model Selection")
+
+      # We add a way to enter a custom model name just in case
       selected_model = st.selectbox(
           "Choose AI Model:",
-          options=["gemini-1.5-pro", "gemini-1.5-flash"],
-          index=0,
-          help="Pro is better for deep analysis; Flash is faster and more stable."
+          options=["gemini-1.5-pro", "gemini-1.5-flash", "custom"],
+          index=0
       )
+
+      if selected_model == "custom":
+          custom_model = st.text_input("Enter exact model name (e.g. gemini-pro-vision):")
+          final_model = custom_model if custom_model else "gemini-1.5-flash"
+      else:
+          final_model = selected_model
+
+      st.markdown("---")
+      st.subheader("Debug Tools")
+      if st.button("🔍 List Available Models"):
+          if not api_key:
+              st.error("Enter API key first!")
+          else:
+              try:
+                  genai.configure(api_key=api_key)
+                  models = genai.list_models()
+                  available_models = [m.name.replace('models/', '') for m in models]
+                  st.write("Available models for your key:")
+                  st.write(available_models)
+              except Exception as e:
+                  st.error(f"Could not fetch models: {e}")
 
   # --- AI Logic ---
 def analyze_video(video_path, user_api_key, model_name):
       try:
           genai.configure(api_key=user_api_key)
-          model = genai.GenerativeModel(model_name=model_name)
+
+          # The SDK sometimes needs the 'models/' prefix explicitly
+          full_model_name = model_name if model_name.startswith('models/') else f"models/{model_name}"
+          model = genai.GenerativeModel(model_name=full_model_name)
 
           st.info("Uploading video to AI server... please wait.")
           video_file = genai.upload_file(path=video_path)
@@ -76,7 +101,7 @@ if uploaded_file is not None:
               st.error("Please enter your API Key in the sidebar first!")
           else:
               with st.spinner("AI is watching and analyzing..."):
-                  result = analyze_video(tmp_path, api_key, selected_model)
+                  result = analyze_video(tmp_path, api_key, final_model)
                   st.success("Analysis Complete!")
                   st.markdown("---")
                   st.markdown(result)
