@@ -5,7 +5,7 @@ import os
 import time
 
   # --- UI Configuration ---
-  st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
+st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
 
   st.title("🎥 AI Video Deep Analyzer & Prompt Generator")
   st.markdown("""
