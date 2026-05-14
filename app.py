@@ -1,4 +1,4 @@
-  import streamlit as st
+import streamlit as st
   import google.generativeai as genai
   import tempfile
   import os
@@ -64,7 +64,6 @@
   uploaded_file = st.file_uploader("Choose a video file...", type=["mp4", "mov", "avi", "mkv"])
 
   if uploaded_file is not None:
-      # Fixing the cut-off issue by simplifying the temp file creation
       ext = os.path.splitext(uploaded_file.name)[1]
       with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
           tmp.write(uploaded_file.read())
