@@ -5,17 +5,17 @@ import os
 import time
 
   # --- UI Configuration ---
-  st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
+st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
 
-  st.title("🎥 AI Video Deep Analyzer & Prompt Generator")
-  st.markdown("""
+st.title("🎥 AI Video Deep Analyzer & Prompt Generator")
+st.markdown("""
   Is app mein aap koi bhi video upload karein, AI use deeply analyze karega aur aapko:
   1. **Detailed Description** dega.
   2. **AI Video/Image Prompts** generate karke dega taaki aap waisa hi content create kar sakein.
   """)
 
   # --- Sidebar for API Key & Model Selection ---
-  with st.sidebar:
+with st.sidebar:
       st.header("Settings")
       api_key = st.text_input("Enter Google Gemini API Key:", type="password")
       st.info("Get your free key from [Google AI Studio](https://aistudio.google.com/)")
@@ -30,7 +30,7 @@ import time
       )
 
   # --- AI Logic ---
-  def analyze_video(video_path, user_api_key, model_name):
+def analyze_video(video_path, user_api_key, model_name):
       try:
           genai.configure(api_key=user_api_key)
           model = genai.GenerativeModel(model_name=model_name)
@@ -61,9 +61,9 @@ import time
           return f"Error: {str(e)}"
 
   # --- Main Interface ---
-  uploaded_file = st.file_uploader("Choose a video file...", type=["mp4", "mov", "avi", "mkv"])
+uploaded_file = st.file_uploader("Choose a video file...", type=["mp4", "mov", "avi", "mkv"])
 
-  if uploaded_file is not None:
+if uploaded_file is not None:
       ext = os.path.splitext(uploaded_file.name)[1]
       with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
           tmp.write(uploaded_file.read())
