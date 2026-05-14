@@ -1,8 +1,8 @@
-import streamlit as st
-import google.generativeai as genai
-import tempfile
-import os
-import time
+  import streamlit as st
+  import google.generativeai as genai
+  import tempfile
+  import os
+  import time
 
   # --- UI Configuration ---
   st.set_page_config(page_title="AI Video Deep Analyzer", page_icon="🎥", layout="wide")
